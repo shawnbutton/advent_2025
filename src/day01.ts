@@ -1,8 +1,3 @@
-import { dirname, join } from 'node:path';
-import { readFileSync } from 'node:fs';
-import { fileURLToPath } from 'node:url';
-
-
 export const doit1 = (testInput: string[]): number => {
     let value = 50
     let count = 0
@@ -15,7 +10,6 @@ export const doit1 = (testInput: string[]): number => {
         if (value > 99) value = value - 100
         if (value < 0) value = value + 100
         if (value == 0) count++
-        console.log(value, count)
     })
 
     return count;
@@ -27,21 +21,19 @@ export const parseLine: (line: string) => [number, number] = (line: string) => {
     return [turn, dist];
 };
 
-// Define __dirname equivalent for ESM
-// @ts-ignore
-const __dirname = dirname(fileURLToPath(import.meta.url));
-const filePath = join(__dirname, 'day01.txt');
-const fileContents = readFileSync(filePath, 'utf-8');
-let lines: string[];
-if (!fileContents.endsWith('\n')) {
-  // don’t slice off last line
-  lines = fileContents.split('\n').filter((l) => l.length > 0);
-} else {
-  lines = fileContents.split('\n').slice(0, -1);
+// Load day01.txt from the project directory and parse each line.
+// This function has no side effects other than reading the file and returns parsed tuples.
+import { join } from 'node:path'
+import { readFileSync } from 'node:fs'
+
+export function loadDay01FromFile(filePath?: string): Array<[number, number]> {
+    const resolvedPath = filePath ?? join(process.cwd(), 'src', 'day01.txt')
+    const content = readFileSync(resolvedPath, 'utf-8')
+    const lines = content.endsWith('\n')
+        ? content.split('\n').slice(0, -1)
+        : content.split('\n').filter((l) => l.length > 0)
+    return lines.map(parseLine)
 }
 
-const total1 = doit1(lines)
-console.log(total1)
-
-// const total2 = doit2(lines)
-// console.log(total2)
+// Remove runtime side effects so tests can import this module without ESM import.meta
+// Consumers (e.g., index.ts) should read files and call exported functions.
