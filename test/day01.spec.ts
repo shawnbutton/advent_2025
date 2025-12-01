@@ -19,13 +19,12 @@ const testInput = [
 describe('Day 01', () => {
 
     it('should parse a line', () => {
-        expect(parseLine('L23')).toEqual([1, 23])
-        expect(parseLine('R45')).toEqual([-1, 45])
+        expect(parseLine('L23')).toEqual([-1, 23])
+        expect(parseLine('R45')).toEqual([1, 45])
     })
 
-
     it('should run pass the example 1', () => {
-        expect(doit1(testInput)).toEqual(3749);
+        expect(doit1(testInput)).toEqual(3);
     });
 });
 

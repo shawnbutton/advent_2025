@@ -3,10 +3,9 @@
     "version": "1.0.0",
     "description": "",
     "main": "dist/index.js",
-    "type": "module",
     "scripts": {
-        "lint": "eslint .",
-        "lint-fix": "eslint . --fix",
+        "lint": "eslint . --ext .ts,.tsx,.js",
+        "lint-fix": "lint --fix .",
         "test": "jest --verbose",
         "test-watch": "jest --watch"
     },
