@@ -6,7 +6,7 @@ import {
     isAbleToMakeTotal,
     isAbleToMakeTotalWithThreeOps,
     parseLine
-} from "../src/day07";
+} from "../src/day01";
 
 const testInput = [
     '190: 10 19',
