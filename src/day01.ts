@@ -4,12 +4,18 @@ export const doit1 = (testInput: string[]): number => {
 
     const lines = testInput.map(parseLine);
 
-
     lines.forEach((line) => {
+        if (line[1] > 99) {
+            const rotations = Math.floor(line[1] / 100);
+            line[1] = line[1] - (rotations * 100);
+        }
+
         value = value + (line[1] * line[0]);
         if (value > 99) value = value - 100
         if (value < 0) value = value + 100
         if (value == 0) count++
+        const literal = line[0] === 1 ? 'R' : 'L'
+        console.log(`Line: ${literal}${line[1]} Value is now ${value} count is ${count}`);
     })
 
     return count;
@@ -26,8 +32,8 @@ export const parseLine: (line: string) => [number, number] = (line: string) => {
 import { join } from 'node:path'
 import { readFileSync } from 'node:fs'
 
-export function loadDay01FromFile(filePath?: string): Array<[number, number]> {
-    const resolvedPath = filePath ?? join(process.cwd(), 'src', 'day01.txt')
+export function loadDay01FromFile(): Array<[number, number]> {
+    const resolvedPath = join(process.cwd(), 'day01.txt')
     const content = readFileSync(resolvedPath, 'utf-8')
     const lines = content.endsWith('\n')
         ? content.split('\n').slice(0, -1)
@@ -35,5 +41,3 @@ export function loadDay01FromFile(filePath?: string): Array<[number, number]> {
     return lines.map(parseLine)
 }
 
-// Remove runtime side effects so tests can import this module without ESM import.meta
-// Consumers (e.g., index.ts) should read files and call exported functions.
