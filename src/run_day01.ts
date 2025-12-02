@@ -1,15 +1,12 @@
-import { loadDay01FromFile, doit1 } from './day01'
+import {loadDay01FromFile, doit1, doit2} from './day01'
 
-function main(): void {
-  try {
+const main = (): void => {
     const parsed = loadDay01FromFile()
-    const result = doit1(parsed.map(([turn, dist]) => `${turn === 1 ? 'R' : 'L'}${dist}`))
-    console.log(`Day 01 part 1: ${result}`)
-  } catch (err) {
-    const msg = err instanceof Error ? err.message : String(err)
-    console.error(`Failed to run Day 01: ${msg}`)
-    process.exitCode = 1
-  }
-}
+    const input = parsed.map(([turn, dist]) => `${turn === 1 ? 'R' : 'L'}${dist}`);
+    const part1Result = doit1(input)
+    console.log(`Day 01 part 1: ${part1Result}`)
+    const part2Result = doit2(input)
+    console.log(`Day 01 part 2: ${part2Result}`)
+};
 
 main()

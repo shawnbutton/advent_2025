@@ -1,5 +1,5 @@
 import {
-    doit1, parseLine,
+    doit1, doit2, parseLine,
 } from "../src/day01";
 
 const testInput = [
@@ -25,6 +25,10 @@ describe('Day 01', () => {
 
     it('should run pass the example 1', () => {
         expect(doit1(testInput)).toEqual(3);
+    });
+
+    it('should run pass the example 2', () => {
+        expect(doit2(testInput)).toEqual(6);
     });
 });
 
