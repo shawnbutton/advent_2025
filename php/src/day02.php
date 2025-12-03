@@ -26,22 +26,28 @@ function expandRange(string $range): array
 
 function isValid(string $number): bool
 {
-    return $number == 122;
+    $length = strlen($number);
+    $halfLength = $length / 2;
+    $firstHalf = substr($number, 0, $halfLength);
+    $secondHalf = substr($number, $halfLength);
+    return $firstHalf !== $secondHalf;
 }
 
 
 function doit1(string $contents): int
 {
+    echo "Input contents: $contents" . PHP_EOL;
     $ranges = parseContents($contents);
     $sum = 0;
     foreach ($ranges as $range) {
         $expanded = expandRange($range);
         foreach ($expanded as $number) {
-            if (isValid((int)$number)) {
+            if (isValid((string)$number)) {
                 $sum += (int)$number;
             }
         }
     }
+    echo "Final sum: $sum" . PHP_EOL;
     return $sum;
 }
 
