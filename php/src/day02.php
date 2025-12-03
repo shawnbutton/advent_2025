@@ -50,3 +50,5 @@ function doit1(string $contents): int
     return $sum;
 }
 
+$data = loadDay02Input();
+echo doit1($data);
