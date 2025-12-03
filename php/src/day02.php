@@ -1,4 +1,5 @@
 <?php
+declare(strict_types=1);
 
 function loadDay02Input(): string
 {
@@ -27,7 +28,7 @@ function expandRange(string $range): array
 function isValid(string $number): bool
 {
     $length = strlen($number);
-    $halfLength = $length / 2;
+    $halfLength = (int)($length / 2);
     $firstHalf = substr($number, 0, $halfLength);
     $secondHalf = substr($number, $halfLength);
     return $firstHalf !== $secondHalf;
