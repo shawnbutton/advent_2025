@@ -33,6 +33,32 @@ function isValid(string $number): bool
     return $firstHalf !== $secondHalf;
 }
 
+function findRepeatingSequence(string $str): bool
+{
+    $length = strlen($str);
+    for ($seqLength = 1; $seqLength <= $length / 2; $seqLength++) {
+        if ($length % $seqLength === 0) {
+            $sequence = substr($str, 0, $seqLength);
+            $isRepeating = true;
+            for ($i = $seqLength; $i < $length; $i += $seqLength) {
+                if (substr($str, $i, $seqLength) !== $sequence) {
+                    $isRepeating = false;
+                    break;
+                }
+            }
+            if ($isRepeating) {
+                return true;
+            }
+        }
+    }
+    return false;
+}
+
+function isValid2(string $number): bool
+{
+    return !findRepeatingSequence($number);
+}
+
 
 function doit1(string $contents): int
 {
@@ -50,5 +76,24 @@ function doit1(string $contents): int
     return $sum;
 }
 
+function doit2(string $contents): int
+{
+    $ranges = parseContents($contents);
+    $sum = 0;
+    foreach ($ranges as $range) {
+        $expanded = expandRange($range);
+        foreach ($expanded as $number) {
+            if (!isValid2($number)) {
+                $sum += (int)$number;
+            }
+        }
+    }
+    echo "Final sum: $sum" . PHP_EOL;
+    return $sum;
+}
+
+//$data = loadDay02Input();
+//echo doit1($data);
+
 $data = loadDay02Input();
-echo doit1($data);
+echo doit2($data);
