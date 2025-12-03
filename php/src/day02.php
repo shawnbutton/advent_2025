@@ -36,13 +36,12 @@ function isValid(string $number): bool
 
 function doit1(string $contents): int
 {
-    echo "Input contents: $contents" . PHP_EOL;
     $ranges = parseContents($contents);
     $sum = 0;
     foreach ($ranges as $range) {
         $expanded = expandRange($range);
         foreach ($expanded as $number) {
-            if (isValid((string)$number)) {
+            if (!isValid($number)) {
                 $sum += (int)$number;
             }
         }
