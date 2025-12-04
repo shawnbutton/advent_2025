@@ -29,6 +29,16 @@ class Day03Test extends TestCase
         $this->assertEquals(357, doit3_1($input));
     }
 
+
+    public function testFindLargest2(): void
+    {
+        $this->assertEquals(987654321111, findLargest2("987654321111111"));
+        $this->assertEquals(811111111119, findLargest2("811111111111119"));
+        $this->assertEquals(434234234278, findLargest2("234234234234278"));
+        $this->assertEquals(888911112111, findLargest2("818181911112111"));
+    }
+
+
 //    public function testDoIt2(): void
 //    {
 //        $input = "11-22,95-115,998-1012,1188511880-1188511890,222220-222224,1698522-1698528,446443-446449,38593856-38593862,565653-565659,824824821-824824827,2121212118-2121212124";

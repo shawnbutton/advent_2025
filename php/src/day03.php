@@ -41,8 +41,35 @@ function doit3_1(array $lines): int
     return $sum;
 }
 
+/**
+ * Finds the largest possible 12-digit number in a string by using a sliding window
+ */
+function findLargest2(string $string): int
+{
+    $chars = str_split($string);
+    $length = strlen($string);
+    $largest = 0;
+
+    for ($i = 0; $i <= $length - 12; $i++) {
+        $number = (int)implode('', array_slice($chars, $i, 12));
+        if ($number > $largest) {
+            $largest = $number;
+        }
+    }
+    return $largest;
+}
+
 function doit3_2(string $contents): int
 {
+    $lines = explode("\n", $contents);
+    $sum = 0;
+
+    foreach ($lines as $line) {
+        $largest = findLargest2($line);
+        $sum += $largest;
+    }
+
+    return $sum;
 }
 
 $data = loadDay03Input();
