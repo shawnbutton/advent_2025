@@ -12,15 +12,16 @@ function findLargest(string $string): int
     $chars = str_split($string);
     $largest = 0;
 
-    for ($first = 0; $first < strlen($string) - 1; $first++) {
-        for ($second = $first + 1; $second < strlen($string) - 1; $second++) {
-            $number = (int)($chars[$first] . $chars[$second + 1]);
-
+    for ($first = 0; $first < strlen($string); $first++) {
+        echo "Trying $first: $chars[$first]" . PHP_EOL;
+        for ($second = $first + 1; $second < strlen($string); $second++) {
+            echo "Second Trying $second: $chars[$second]" . PHP_EOL;
+            $number = (int)($chars[$first] . $chars[$second]);
+            echo "number $chars[$first] + $chars[$second] = $number" . PHP_EOL;
             if ($number > $largest) {
                 $largest = $number;
             }
         }
-
     }
     return $largest;
 }
@@ -44,8 +45,10 @@ function doit3_2(string $contents): int
 {
 }
 
-//$data = loadDay03Input();
-//echo doit3_1($data);
+$data = loadDay03Input();
+$lines = explode("\n", $data);
+
+echo doit3_1($lines);
 
 //$data = loadDay03Input();
 //echo doit2($data);
